@@ -8,15 +8,11 @@ const config = {
   },
 };
 
-
-
 function checkResponse(res) {
   if (res.ok) return res.json();
 
   return Promise.reject(`Ошибка: ${res.status}`);
 }
-
-
 
 function updateAvatar(avatar) {
   return fetch(`${config.baseUrl}/users/me/avatar`, {
@@ -28,14 +24,11 @@ function updateAvatar(avatar) {
   }).then((res) => checkResponse(res));
 }
 
-
 function getProfileInfo() {
   return fetch(`${config.baseUrl}/users/me`, {
     headers: config.headers,
   }).then((res) => checkResponse(res));
 }
-
-
 
 function editProfileInfo(name, about) {
   return fetch(`${config.baseUrl}/users/me`, {
@@ -48,15 +41,11 @@ function editProfileInfo(name, about) {
   }).then((res) => checkResponse(res));
 }
 
-
-
 function getInitialCards() {
   return fetch(`${config.baseUrl}/cards`, {
     headers: config.headers,
   }).then((res) => checkResponse(res));
 }
-
-
 
 function addCard(name, link) {
   return fetch(`${config.baseUrl}/cards`, {
@@ -69,8 +58,6 @@ function addCard(name, link) {
   }).then((res) => checkResponse(res));
 }
 
-
-
 function deleteCard(cardId) {
   return fetch(`${config.baseUrl}/cards/${cardId}`, {
     method: "DELETE",
@@ -78,16 +65,12 @@ function deleteCard(cardId) {
   }).then((res) => checkResponse(res));
 }
 
-
-
 function likeCard(cardId) {
   return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
     method: "PUT",
     headers: config.headers,
   }).then((res) => checkResponse(res));
 }
-
-
 
 function dislikeCard(cardId) {
   return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {

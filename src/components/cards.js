@@ -30,8 +30,6 @@ function createCard(cardData, profileId, onLike, onDelete, onOpenImage) {
   return card;
 }
 
-
-
 function changeLike(card, cardData) {
   const cardLikeButton = card.querySelector(".card__like-button"),
     cardLikeCounter = card.querySelector(".card__like-counter");
@@ -58,8 +56,6 @@ function changeLike(card, cardData) {
       );
   }
 }
-
-
 
 function deleteMyCard(card) {
   card.remove();

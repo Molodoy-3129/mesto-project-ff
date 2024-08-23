@@ -3,23 +3,15 @@ import {deleteCard } from "./components/api";
 import {updateAvatar, getProfileInfo, editProfileInfo, getInitialCards, addCard} from "./components/api";
 import {createCard, changeLike, deleteMyCard } from "./components/cards";
 import {enableValidation, clearValidation } from "./components/validation";
-import {openPopup, closePopup, closeByOverlay } from "./components/modal";
+import {openPopup, closePopup, closeOverlay } from "./components/modal";
 
 
 
 
-const validationConfig = {
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__button",
-  inactiveButtonClass: "popup__button_disabled",
-  inputErrorClass: "popup__input_type_error",
-  errorClass: "popup__error_visible",
+const validationConfig = {formSelector: ".popup__form", inputSelector: ".popup__input", submitButtonSelector: ".popup__button", inactiveButtonClass: "popup__button_disabled", inputErrorClass: "popup__input_type_error", errorClass: "popup__error_visible",
 };
 
 let profileId = null;
-
-
 
 const cardsContainer = document.querySelector(".places__list");
 
@@ -137,20 +129,12 @@ function handleNewCardFormSubmit(evt) {
 
   addCard(cardNameInput.value, cardLinkInput.value)
     .then((cardData) => {
-      const newCard = createCard(
-        cardData,
-        profileId,
-        changeLike,
-        removeCard,
-        onOpenImage
-      );
-
+      const newCard = createCard(cardData, profileId, changeLike, removeCard, onOpenImage);
       cardsContainer.prepend(newCard);
-
       closePopup(popupNewCard);
-
       cardForm.reset();
     })
+
     .catch((error) => console.error("Ошибка при добавлении карточки:", error))
     .finally(() => (popupNewCardButton.textContent = originalButtonText));
 
@@ -209,7 +193,7 @@ profileAvatarEditButton.addEventListener("click", () => openEditAvatarPopup());
 profileEditButton.addEventListener("click", () => openEditProfilePopup());
 profileAddButton.addEventListener("click", () => openPopup(popupNewCard));
 
-popups.forEach((popup) => popup.addEventListener("mousedown", closeByOverlay));
+popups.forEach((popup) => popup.addEventListener("mousedown", closeOverlay));
 
 
 
