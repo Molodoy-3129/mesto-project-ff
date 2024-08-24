@@ -1,4 +1,4 @@
-import { deleteCard, likeCard, dislikeCard } from "./api";
+import { deleteCard, likeCard, dislikeCard } from "./card";
 
 
 
@@ -21,7 +21,7 @@ function createCard(cardData, profileId, onLike, onDelete, onOpenImage) {
   else deleteButton.style.display = "none";
 
   if (isLiked) cardLikeButton.classList.add("card__like-button_is-active");
-  else cardLikeButton.classList.remove("card__like-button_is-active");
+ 
 
   cardImage.addEventListener("click", () => onOpenImage(card));
   cardLikeButton.addEventListener("click", () => onLike(card, cardData));
@@ -34,29 +34,14 @@ function changeLike(card, cardData) {
   const cardLikeButton = card.querySelector(".card__like-button"),
     cardLikeCounter = card.querySelector(".card__like-counter");
 
-  if (cardLikeButton.classList.contains("card__like-button_is-active")) {
-    dislikeCard(cardData._id)
-      .then((data) => {
-        cardLikeCounter.textContent = data.likes.length;
-
-        cardLikeButton.classList.remove("card__like-button_is-active");
-      })
-      .catch((error) =>
-        console.error("Ошибка при добавлении карточки:", error)
-      );
-  } else {
-    likeCard(cardData._id)
-      .then((data) => {
-        cardLikeCounter.textContent = data.likes.length;
-
-        cardLikeButton.classList.add("card__like-button_is-active");
-      })
-      .catch((error) =>
-        console.error("Ошибка при добавлении карточки:", error)
-      );
-  }
-}
-
+    const likeMethod = cardLikeButton.classList.contains("card__like-button_is-active") ? dislikeCard : likeCard;
+    likeMethod(cardData._id) 
+            .then((data) => {
+               cardLikeCounter.textContent = data.likes.length; 
+              cardLikeButton.classList.toggle("card__like-button_is-active"); 
+            })
+    .catch(err => console.error("Ошибка при лайке:", error))};
+          
 function deleteMyCard(card) {
   card.remove();
 }

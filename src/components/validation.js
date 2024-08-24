@@ -22,12 +22,7 @@ function showError(input, errorMessage, validationConfig) {
   
   
   function checkInputValidity(input, validationConfig) {
-    if (input.validity.valueMissing) {
-      showError(input, "Это обязательное поле", validationConfig);
-  
-      return false;
-    }
-  
+ 
     if (input.validity.patternMismatch)
       input.setCustomValidity(input.dataset.error);
     else input.setCustomValidity("");
