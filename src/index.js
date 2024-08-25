@@ -1,7 +1,7 @@
 import "./pages/index.css";
-import {deleteCard } from "./components/card";
-import {updateAvatar, getProfileInfo, editProfileInfo, getInitialCards, addCard} from "./components/card";
-import {createCard, changeLike, deleteMyCard } from "./components/cards";
+import {deleteCard } from "./components/api";
+import {updateAvatar, getProfileInfo, editProfileInfo, getInitialCards, addCard} from "./components/api";
+import {createCard, changeLike, deleteMyCard } from "./components/card";
 import {enableValidation, clearValidation } from "./components/validation";
 import {openPopup, closePopup, closeOverlay } from "./components/modal";
 
